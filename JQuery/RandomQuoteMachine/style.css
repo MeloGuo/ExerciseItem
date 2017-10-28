@@ -1,0 +1,60 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center; }
+
+body {
+  background-color: gray;
+  font-family: 'Raleway', sans-serif; }
+
+#quote-box {
+  background-color: #fff;
+  border-radius: 3px;
+  margin: 8% auto auto auto;
+  overflow: auto;
+  padding: 2em;
+  vertical-align: baseline;
+  width: 450px; }
+  #quote-box #quote-text {
+    font-size: 1.75em;
+    font-weight: 500; }
+    #quote-box #quote-text i {
+      margin-right: 0.5em; }
+  #quote-box #quote-author {
+    float: right;
+    padding-top: 1em; }
+  #quote-box #buttons {
+    clear: both; }
+    #quote-box #buttons .button {
+      background-color: gray;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 30px;
+      margin-right: 5px;
+      height: 38px;
+      opacity: 1;
+      padding-top: 8px; }
+      #quote-box #buttons .button:hover {
+        opacity: 0.9; }
+      #quote-box #buttons .button#tweet-quote, #quote-box #buttons .button#tumblr-quote {
+        font-size: 1.2em;
+        float: left;
+        height: 30px;
+        width: 40px; }
+      #quote-box #buttons .button#new-quote {
+        border: none;
+        display: block;
+        float: right;
+        outline: none;
+        padding: 8px 18px 6px 18px; }
+
+footer {
+  width: 450px;
+  margin: 0.5em auto 0 auto; }
+  footer a {
+    text-decoration: none;
+    color: #fff; }
+
+/*# sourceMappingURL=style.css.map */
