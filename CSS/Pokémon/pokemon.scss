@@ -1,0 +1,548 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto+Condensed:300';
+$primary-color: #ff5757;
+$primary-color-dark: darken( $primary-color, 10% );
+$primary-color-tint: lighten( $primary-color, 5% );
+$primary-font: "Roboto Condensed", sans-serif;
+$black: #444;
+$red: $primary-color;
+$orange: #ff9147;
+$yellow: #fff069;
+$blue: #4ee4ff;
+$pink: #ff70b3;
+$brown: #594944;
+$teal: #405955;
+$mint: #56ffe9;
+
+body {
+	background-color: $primary-color;
+	font-family: $primary-font;
+	line-height: 1.875;
+}
+.container-boxy {
+	position: relative;
+	width: 820px;
+	margin: 50px auto;
+	padding: 60px;
+	padding-bottom: 0;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 10px 10px 0 $primary-color-dark;
+	background-color: #fff;
+}
+
+
+$head-radius-top: 50% 80px;
+$head-radius-bottom: 55px;
+
+@keyframes rotateTail {
+	0%, 100% { transform: rotate(-25deg) }
+	50% { transform: rotate(-35deg) }
+}
+
+@keyframes mouthOpen {
+	0% { width: 25px }
+	100% { width: 7px }
+}
+
+@keyframes bubbs {
+	0%, 10% {
+		width: 10px;
+		height: 10px;
+		border-bottom-right-radius: 0;
+		transform: translate(0) scale(1);
+	}
+	30% {
+		border-bottom-right-radius: 0;
+		transform: translate(0) scale(2.3);
+	}
+	100% {
+		width: 10px;
+		height: 10px;
+		transform: translate(-70px, -20px) scale(4);
+	}
+}
+
+@keyframes flicker {
+	0% { transform: skewY(0deg) }
+	50% { transform: skewY(10deg) }
+}
+
+@keyframes squish {
+	0% { transform: rotate(45deg) scale(1) }
+	80% { transform: rotate(45deg) scale(1.2) }
+}
+
+.poke {
+	position: relative;
+	display: inline-block;
+	
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		z-index: 0;
+		bottom: -30px;
+		height: 40px;
+		width: 25px;
+		border-bottom-left-radius: 50% 40px;
+		border-bottom-right-radius: 50% 40px;
+	}
+	&::before {
+		left: 40px;
+		transform: rotate(-10deg);
+	}
+	&::after {
+		right: 40px;
+		transform: rotate(10deg);
+	}
+}
+
+.head {
+	position: relative;
+	z-index: 5;
+	width: 200px;
+	height: 155px;
+	border-top-left-radius: $head-radius-top;
+	border-top-right-radius: $head-radius-top;
+	border-bottom-left-radius: $head-radius-bottom;
+	border-bottom-right-radius: $head-radius-bottom;
+	overflow: hidden;
+	
+	> div {
+		position: absolute;
+	}
+	
+	.eye {
+		bottom: 35px;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		
+		&:nth-child(1) {
+			left: 30px;
+		}
+		&:nth-child(2) {
+			right: 30px;
+		}
+	}
+	
+	.mouth {
+		left: 50%;
+		bottom: 40px;
+		height: 10px;
+		width: 25px;
+		transform: translateX(-50%);
+		
+		&::after,
+		&::before {
+			content: '';
+			position: absolute;
+			height: 100%;
+			width: 50%;
+			border-radius: 50%;
+			border-bottom: solid 3px $black;
+		}
+		&::after {
+			left: 50%;
+		}
+	}
+	
+	.cheek {
+		bottom: 15px;
+		height: 15px;
+		width: 30px;
+		border-radius: 50px / 30px;
+		background-color: rgba($pink, 0.8);
+		
+		&:nth-child(3) {
+			left: 10px;
+		}
+		&:nth-child(4) {
+			right: 10px;
+		}
+	}
+}
+
+#pika {
+	.ear {
+		position: absolute;
+		top: -30px;
+		height: 80px;
+		width: 40px;
+		border-top-left-radius: 25px 100%;
+		border-top-right-radius: 25px 100%;
+		background-color: $yellow;
+		overflow: hidden;
+		transform-origin: center bottom;
+		transition: 0.3s;
+		
+		&::after {
+			content: '';
+			position: absolute;
+			top: -10px;
+			left: -10px;
+			width: 150%;
+			height: 40px;
+			background-color: $black;
+		}
+		
+		&:nth-child(1) {
+			left: 5px;
+			transform: rotate(-20deg);
+			
+			&::after {
+				transform: rotate(-15deg);
+			}
+		}
+		&:nth-child(2) {
+			right: 5px;
+			transform: rotate(20deg);
+			
+			&::after {
+				transform: rotate(15deg);
+			}
+		}
+	}
+	
+	.head {
+		background-color: $yellow;
+	}
+	
+	.eye {
+		background-color: $black;
+	}
+	
+	.cheek {
+		bottom: -10px;
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+		background-color: $red;
+		
+		&:nth-child(3) {
+			left: -10px;
+		}
+		&:nth-child(4) {
+			right: -10px;
+		}
+	}
+	
+	.tail {
+		position: absolute;
+		left: calc(50% - 10px);
+		top: -25px;
+		width: 20px;
+		height: 30px;
+		background-color: darken($yellow, 15%);
+		transform: rotate(-25deg);
+		transform-origin: center bottom;
+		
+		&::before {
+			content: '';
+			position: absolute;
+			top: -25px;
+			width: 50px;
+			height: 35px;
+			border-radius: 5px;
+			background-color: darken($yellow, 15%);
+		}
+	}
+	
+	&::before,
+	&::after {
+		background-color: darken($yellow, 15%);
+	}
+	
+	&:hover {
+		.ear {
+			&:nth-child(1) {
+				transform: rotate(-35deg);
+			}
+			&:nth-child(2) {
+				transform: rotate(35deg);
+			}
+		}
+		
+		.tail {
+			animation-name: rotateTail;
+			animation-duration: 1.2s;
+			animation-iteration-count: infinite;
+		}
+	}
+}
+
+#squirt {
+	.head {
+		background-color: $blue;
+	}
+	
+	.eye {
+		background-color: $brown;
+	}
+	
+	&::before,
+	&::after {
+		background-color: darken($blue, 10%);
+	}
+	
+	.tail {
+		position: absolute;
+		left: calc(50% - 15px);
+		top: -40px;
+		width: 60px;
+		height: 100px;
+		border-radius: 50px;
+		border-left: 40px solid darken($blue, 10%);
+		transform-origin: center bottom;
+		transition: 0.3s;
+		
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+		}
+		&::before {
+			top: 0;
+			left: -20px;
+			width: 60px;
+			height: 60px;
+			border-radius: 50%;
+			background-color: darken($blue, 10%);
+		}
+		&::after {
+			top: 20px;
+			left: -20px;
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			border-left: solid 3px darken($blue, 20%);
+			border-top: solid 3px darken($blue, 20%);
+		}
+	}
+	
+	.bubble {
+		position: absolute;
+		z-index: 14;
+		bottom: 40px;
+		left: 85px;
+		// height: 0;
+		// width: 0;
+		border-radius: 50%;
+		background-color: $blue;
+		// opacity: 0.7;
+		mix-blend-mode: screen;
+		transform-origin: right bottom;
+	}
+	
+	&:hover {
+		.tail {
+			transform: rotate(-10deg);
+		}
+		.mouth {
+			animation-name: mouthOpen;
+			animation-duration: 0.4s;
+			width: 7px;
+			height: 5px;
+			background-color: $brown;
+			border-radius: 50%;
+			
+			&::after,
+			&::before {
+				visibility: hidden;
+			}
+		}
+		.bubble {
+			animation-delay: 0.4s;
+			animation-name: bubbs;
+			animation-duration: 1.4s;
+			animation-iteration-count: infinite;
+		}
+	}
+}
+
+#char {
+	.head {
+		background-color: $orange;
+	}
+	
+	.eye {
+		background-color: $teal;
+	}
+	
+	&::before,
+	&::after {
+		background-color: darken($orange, 10%);
+	}
+	
+	.tail {
+		position: absolute;
+		left: calc(50% - 10px);
+		top: -40px;
+		width: 60px;
+		height: 100px;
+		border-radius: 50px;
+		border-left: 40px solid darken($orange, 10%);
+		transform-origin: center bottom;
+		transition: 0.3s;
+		
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+		}
+		&::before {
+			top: -35px;
+			left: calc(50% - 40px);
+			width: 50px;
+			height: 50px;
+			border-radius: 50% 0 50% 50%;
+			background-color: $yellow;
+		}
+		&::after {
+			top: -15px;
+			left: calc(50% - 30px);
+			width: 20px;
+			height: 20px;
+			border-radius: 50% 0 50% 100%;
+			background-color: $red;
+		}
+	}
+	
+	&:hover {
+		.tail {
+			transform: rotate(-15deg);
+			
+			&::before, 
+			&::after {
+				animation-delay: 0.4s;
+				animation-name: flicker;
+				animation-iteration-count: infinite;
+			}
+			&::before {
+				animation-duration: 0.4s;
+			}
+			&::after {
+				animation-duration: 0.2s;
+			}
+		}
+	}
+}
+
+#bulba {
+	.ear {
+		position: absolute;
+		z-index: 3;
+		top: -10px;
+		height: 40px;
+		width: 55px;
+		border-top-left-radius: 50px 70px;
+		border-top-right-radius: 50px 70px;
+		background-color: $mint;
+		transform-origin: center bottom;
+		transition: 0.3s;
+		
+		&:nth-child(1) {
+			left: 5px;
+			transform: rotate(-40deg);
+		}
+		
+		&:nth-child(2) {
+			right: 5px;
+			transform: rotate(40deg);
+		}
+	}
+	
+	.head {
+		background-color: $mint;
+		
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			background-color: darken($mint, 30%);
+		}
+		&::before {
+			top: 40px;
+			left: 60px;
+			height: 35px;
+			width: 35px;
+			border-bottom-left-radius: 100%;
+			border-bottom-right-radius: 10px 40px;
+			border-top-left-radius: 40px 10px;
+			border-top-right-radius: 5px;
+			transform: rotate(-20deg);
+		}
+		&::after {
+			top: 25px;
+			right: 40px;
+			height: 20px;
+			width: 20px;
+			border-bottom-left-radius: 100%;
+			border-bottom-right-radius: 5px 10px;
+			border-top-left-radius: 10px 5px;
+			border-top-right-radius: 5px;
+			transform: rotate(20deg);
+		}
+	}
+	
+	.eye {
+		background-color: $black;
+	}
+	
+	&::before,
+	&::after {
+		background-color: darken($mint, 15%);
+	}
+	
+	.bulbs {
+		position: absolute;
+		z-index: 2;
+		top: -30px;
+		left: calc(50% - 50px);
+		width: 100px;
+		height: 100px;
+		transform: rotate(45deg);
+		
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			z-index: 1;
+			width: 80px;
+			height: 80px;
+			border-radius: 0 50% 100% 50%;
+			background-color: darken($mint, 30%);
+		}
+		&::before {
+			transform: translate(-20px, 25px) rotate(15deg);
+		}
+		&::after {
+			transform: translate(25px, -20px) rotate(-15deg);
+		}
+		
+		.bulb {
+			position: absolute;
+			z-index: 3;
+			width: 100%;
+			height: 100%;
+			border-radius: 0 50% 100% 50%;
+			background-color: darken($mint,25%);
+		}
+	}
+	
+	&:hover {
+		.ear {
+			&:nth-child(1) {
+				transform: rotate(-55deg) translateY(5px);
+			}
+			&:nth-child(2) {
+				transform: rotate(55deg) translateY(5px);
+			}
+		}
+		.bulbs {
+			animation-name: squish;
+			animation-duration: 1.6s;
+			animation-iteration-count: infinite;
+		}
+	}
+}
