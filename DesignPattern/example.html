@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Example</title>
+    <meta name="description" content="design pattern example">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <h1>设计模式实例</h1>
+    <div>
+      <h2>单例模式</h2>
+      <button id="loginBtn">登陆</button>
+    </div>
+    <div>
+      <h2>策略模式</h2>
+      <div style="position: relative; background: blue; color: white; width: 100px;" id="div">
+        我是div
+      </div>
+      <div>
+        <form action="#" id="registerForm" method="POST">
+          <div>
+            请输入用户名：<input type="text" name="userName" />
+          </div>
+          <div>
+            请输入密码：<input type="text" name="password" />
+          </div>
+          <div>
+            请输入手机号码：<input type="text" name="phoneNumber" />
+          </div>
+          <button>提交</button>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="./Single.js"></script>
+    <!-- <script type="text/javascript" src="./Strategy.js"></script> -->
+  </body>
+</html>
