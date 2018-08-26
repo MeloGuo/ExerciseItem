@@ -1,5 +1,11 @@
 # WebStorm
 .idea
 
+# VSCode
+.vscode
+
 # SASS
 .sass-cache
+
+#JAVA
+*.class

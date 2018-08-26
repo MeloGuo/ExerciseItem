@@ -1,0 +1,19 @@
+{
+  "name": "exerciseitem",
+  "version": "1.0.0",
+  "description": "在这里放一下平时练手的小Demo，或者是CSS练习等。",
+  "main": "Node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mluka/ExerciseItem.git"
+  },
+  "author": "MeloGuo <guoziliang199606@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mluka/ExerciseItem/issues"
+  },
+  "homepage": "https://github.com/Mluka/ExerciseItem#readme"
+}
