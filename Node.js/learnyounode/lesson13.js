@@ -27,14 +27,22 @@ const route = {
 const server = http.createServer((req, res) => {
   const urlObject = url.parse(req.url, true)
   const pathname = urlObject.pathname
-  const result = route[pathname](urlObject.query)
+  const router = route[pathname]
+  let result = null
+
+  if (router) {
+    result = router(urlObject.query)
+  }
 
   if (result) {
     res.writeHead(200, { 'content-type': 'application/json' })
+    console.log(res.getHeaders())
+    console.log(new Date())
     res.end(JSON.stringify(result))
   } else {
     res.writeHead(404)
-    res.end()
+    console.log(`Not Found ${req.url}`)
+    res.end(`Not Found ${req.url}`)
   }
 })
 
