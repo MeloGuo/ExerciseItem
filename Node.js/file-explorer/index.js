@@ -6,8 +6,9 @@ const fs = require('fs')
 const stdin = process.stdin
 const stdout = process.stdout
 
-
 fs.readdir(process.cwd(), (err, files) => {
+  if (err) console.error(err)
+
   console.log('')
 
   if (!files.length) {
@@ -16,10 +17,14 @@ fs.readdir(process.cwd(), (err, files) => {
 
   console.log('选择想要查看的文件或目录\n')
   
+  const stats = []
+
   function file (i) {
     const filename = files[i]
 
     fs.stat(__dirname + '/' + filename, (err, stat) => {
+      stats[i] = stat
+
       if (stat.isDirectory()) {
         console.log('  ' + i + '  \033[36m' + filename + '/\033[39m')
       } else {
@@ -47,12 +52,24 @@ fs.readdir(process.cwd(), (err, files) => {
       stdout.write('  \033[31mEnter your choice: \033[39m')
     } else {
       stdin.pause()
-      fs.readFile(__dirname + '/' + filename, 'utf8', (err, data) => {
-        if (err) console.error(err)
 
-        console.log('')
-        console.log('  \033[90m' + data + '\033[39m')
-      })
+      if (stats[Number(data)].isDirectory()) {
+        fs.readdir(__dirname + '/' + filename, (err, files) => {
+          console.log('')
+          console.log('  (' + files.length + ' files)')
+          files.forEach(file => {
+            console.log(('  -  ' + file))
+          })
+          console.log('')
+        })        
+      } else {
+        fs.readFile(__dirname + '/' + filename, 'utf8', (err, data) => {
+          if (err) console.error(err)
+
+          console.log('')
+          console.log('  \033[90m' + data + '\033[39m')
+        })
+      }      
     }
   }
 
