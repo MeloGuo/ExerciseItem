@@ -1,38 +1,33 @@
 let currentIndex = 0
+let $buttonNext = $('.next')
+let $buttonPrevious = $('.previous')
 let $slides = $('.slides')
 let $slidesWindow = $('.slidesWindow')
 
-function playNextSlide () {
-  $slides.css({
-    transform: `translateX(${-400 * (currentIndex + 1)}px)`
-  })
-  if (currentIndex > 4) {
-    currentIndex = 0
-  } else {
-    currentIndex += 1
+function playSlide (index) {
+  if (index < 0) {
+    index = 4
+  } else if (index > 4) {
+    index = 0
   }
+
+  $slides.css({
+    transform: `translate(${400 * index}px)`
+  })
+
+  currentIndex = index
+  return index
 }
 
-function playPreviousSlide () {
-  $slides.css({
-    transform: `translateX(${400 * (currentIndex - 1)}px)`
-  })
-  if (currentIndex < 0) {
-    currentIndex = 4
-  } else {
-    currentIndex -= 1
-  }
+$buttonNext.onClick = (event) => {
+  playSlide(currentIndex + 1)
 }
-
-buttonNext.onClick = (event) => {
-  playNextSlide()
-}
-buttonPrevious.onClick = (event) => {
-  playPreviousSlide()
+$buttonPrevious.onClick = (event) => {
+  playSlide(currentIndex - 1)
 }
 
 let timerId = setInterval(() => {
-  playNextSlide()
+  playSlide(currentIndex + 1)
 }, 3000)
 
 $slidesWindow.on('mouseenter', () => {
@@ -41,6 +36,6 @@ $slidesWindow.on('mouseenter', () => {
 
 $slidesWindow.on('mouseleave', () => {
   timerId = setTimeout(() => {
-    playNextSlide()
+    playSlide(currentIndex + 1)
   }, 3000)
 })
