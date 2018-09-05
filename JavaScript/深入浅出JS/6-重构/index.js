@@ -1,15 +1,12 @@
 let currentIndex = 0
+let timerId
 let $buttonNext = $('.next')
 let $buttonPrevious = $('.previous')
 let $slides = $('.slides')
 let $slidesWindow = $('.slidesWindow')
 
 function playSlide (index) {
-  if (index < 0) {
-    index = 4
-  } else if (index > 4) {
-    index = 0
-  }
+  index = fixIndex(index)
 
   $slides.css({
     transform: `translate(${400 * index}px)`
@@ -19,23 +16,50 @@ function playSlide (index) {
   return index
 }
 
-$buttonNext.onClick = (event) => {
+function fixIndex (index) {
+  if (index < 0) {
+    index = 4
+  } else if (index > 4) {
+    index = 0
+  }
+
+  return index
+}
+
+function autoPlay () {
+  return setInterval(() => {
+    playSlide(currentIndex + 1)
+  }, 3000)
+}
+
+let playNext = () => {
   playSlide(currentIndex + 1)
 }
-$buttonPrevious.onClick = (event) => {
+
+let playPrevious = () => {
   playSlide(currentIndex - 1)
 }
 
-let timerId = setInterval(() => {
-  playSlide(currentIndex + 1)
-}, 3000)
+let clearTimer = () => {
+  window.clearInterval(timerId)
+}
 
-$slidesWindow.on('mouseenter', () => {
-  clearInterval(timerId)
-})
+let resetTimer = () => {
+  timerId = autoPlay()
+}
+function bindEvents () {
+  const events = [
+    { el: $buttonNext, event: 'click', fn: playNext },
+    { el: $buttonPrevious, event: 'click', fn: playPrevious },
+    { el: $slidesWindow, event: 'mouseenter', fn: clearTimer },
+    { el: $slidesWindow, event: 'mouseleave', fn: resetTimer }
+  ]
 
-$slidesWindow.on('mouseleave', () => {
-  timerId = setTimeout(() => {
-    playSlide(currentIndex + 1)
-  }, 3000)
-})
+  events.forEach(eventObject => {
+    $(eventObject.el).on(eventObject.event, eventObject.fn)
+  })
+}
+
+bindEvents()
+
+timerId = autoPlay()
