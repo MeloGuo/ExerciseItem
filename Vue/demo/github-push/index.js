@@ -42,13 +42,16 @@ const vm = new Vue({
   },
   methods: {
     fetchData: function (currentBranch) {
-      axios.get(`${apiURL}${currentBranch}`).then(res => {
-        return res.data
-      }).then(commits => {
-        this.commits = commits.map(commit => {
-          return new Commit(commit)
-        })
-      }).catch(err => console.error(err))
+      axios.get(`${apiURL}${currentBranch}`)
+        .then(res => res.data)
+        .then(this.makeCommit)
+        .catch(err => console.error(err))
+    },
+
+    makeCommit: function (commits) {
+      this.commits = commits.map(commit => {
+        return new Commit(commit)
+      })
     }
   }
 })
