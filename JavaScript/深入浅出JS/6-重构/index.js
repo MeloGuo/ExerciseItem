@@ -1,5 +1,6 @@
 let currentIndex = 0
 let timerId
+let duration = 3000
 let $buttonNext = $('.next')
 let $buttonPrevious = $('.previous')
 let $slides = $('.slides')
@@ -26,10 +27,10 @@ function fixIndex (index) {
   return index
 }
 
-function autoPlay () {
+function autoPlay (duration) {
   return setInterval(() => {
     playSlide(currentIndex + 1)
-  }, 3000)
+  }, duration)
 }
 
 let playNext = () => {
@@ -45,7 +46,7 @@ let clearTimer = () => {
 }
 
 let resetTimer = () => {
-  timerId = autoPlay()
+  timerId = autoPlay(duration)
 }
 function bindEvents () {
   const events = [
@@ -62,4 +63,4 @@ function bindEvents () {
 
 bindEvents()
 
-timerId = autoPlay()
+timerId = autoPlay(duration)
