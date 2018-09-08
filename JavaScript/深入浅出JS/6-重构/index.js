@@ -1,66 +1,59 @@
-let currentIndex = 0
-let timerId
-let duration = 3000
-let $buttonNext = $('.next')
-let $buttonPrevious = $('.previous')
-let $slides = $('.slides')
-let $slidesWindow = $('.slidesWindow')
+const slides = {
+  currentIndex: 0,
+  timerId: null,
+  duration: 3000,
+  $slides: $('.slides'),
+  events: [
+    { el: '.next', event: 'click', fn: 'playNext' },
+    { el: '.previous', event: 'click', fn: 'playPrevious' },
+    { el: '.slidesWindow', event: 'mouseenter', fn: 'clearTimer' },
+    { el: '.slidesWindow', event: 'mouseleave', fn: 'resetTimer' }
+  ],
+  init () {
+    this.bindEvents()
+    this.timerId = this.autoPlay(this.duration)
+  },
+  bindEvents () {
+    this.events.forEach(eventObject => {
+      $(eventObject.el).on(eventObject.event, this[eventObject.fn].bind(this))
+    })
+  },
+  playSlide (index) {
+    index = this.fixIndex(index)
 
-function playSlide (index) {
-  index = fixIndex(index)
+    this.$slides.css({
+      transform: `translate(${-400 * index}px)`
+    })
 
-  $slides.css({
-    transform: `translate(${400 * index}px)`
-  })
+    this.currentIndex = index
+    return index
+  },
+  fixIndex (index) {
+    if (index < 0) {
+      index = 4
+    } else if (index > 4) {
+      index = 0
+    }
 
-  currentIndex = index
-  return index
-}
-
-function fixIndex (index) {
-  if (index < 0) {
-    index = 4
-  } else if (index > 4) {
-    index = 0
+    return index
+  },
+  autoPlay () {
+    return setInterval(() => {
+      this.playSlide(this.currentIndex + 1)
+    }, this.duration)
+  },
+  playNext () {
+    this.playSlide(this.currentIndex + 1)
+  },
+  playPrevious () {
+    this.playSlide(this.currentIndex - 1)
+  },
+  clearTimer () {
+    window.clearInterval(this.timerId)
+  },
+  resetTimer () {
+    this.timerId = this.autoPlay(this.duration)
   }
-
-  return index
 }
 
-function autoPlay (duration) {
-  return setInterval(() => {
-    playSlide(currentIndex + 1)
-  }, duration)
-}
-
-let playNext = () => {
-  playSlide(currentIndex + 1)
-}
-
-let playPrevious = () => {
-  playSlide(currentIndex - 1)
-}
-
-let clearTimer = () => {
-  window.clearInterval(timerId)
-}
-
-let resetTimer = () => {
-  timerId = autoPlay(duration)
-}
-function bindEvents () {
-  const events = [
-    { el: $buttonNext, event: 'click', fn: playNext },
-    { el: $buttonPrevious, event: 'click', fn: playPrevious },
-    { el: $slidesWindow, event: 'mouseenter', fn: clearTimer },
-    { el: $slidesWindow, event: 'mouseleave', fn: resetTimer }
-  ]
-
-  events.forEach(eventObject => {
-    $(eventObject.el).on(eventObject.event, eventObject.fn)
-  })
-}
-
-bindEvents()
-
-timerId = autoPlay(duration)
+slides.init()

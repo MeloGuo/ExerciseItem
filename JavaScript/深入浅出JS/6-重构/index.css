@@ -1,0 +1,18 @@
+.slidesWindow {
+  width: 400px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.slides {
+  width: 2000px;
+  height: 200px;
+}
+.slide {
+  box-sizing: border-box;
+  border: 10px solid red;
+  background-color: green;
+  width: 400px;
+  height: 200px;
+  float: left;
+}
