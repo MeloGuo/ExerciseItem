@@ -20,8 +20,10 @@
     "async": "^2.6.1",
     "bl": "^2.0.1",
     "formidable": "^1.2.1",
+    "koa": "^2.5.2",
     "split": "^1.0.1",
     "through2": "^2.0.3",
-    "through2-map": "^3.0.0"
+    "through2-map": "^3.0.0",
+    "underscore": "^1.9.1"
   }
 }
