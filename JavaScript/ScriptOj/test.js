@@ -102,3 +102,26 @@ const obj = {
 console.log(safeGet(obj, 'name'))
 console.log(safeGet(obj, 'name.cool'))
 console.log(safeGet(obj, 'name.cool.oh'))
+
+/**
+ * #98 判断两个矩形是否重叠
+ */
+const isOverlap = (rect1, rect2) => {
+  if (rect1.x > rect2.x + rect2.width ||
+    rect2.x > rect1.x + rect1.width ||
+    rect1.y > rect2.y + rect2.height ||
+    rect2.y > rect1.y + rect1.height) {
+    return false
+  }
+
+  return true
+}
+// test
+const rect1 = { x: 100, y: 100, width: 100, height: 100 }
+const rect2 = { x: 150, y: 150, width: 100, height: 100 }
+const rect3 = { x: 500, y: 500, width: 10, height: 10 }
+const rect4 = { x: 522.5452038024096, y: 387.51761519410184, width: 226.72102064120162, height: 238.31261460557172 }
+const rect5 = { x: 143.12948799657278, y: 21.16268773055232, width: 242.39146722821067, height: 397.3004059308193 }
+console.log(isOverlap(rect1, rect2))
+console.log(isOverlap(rect1, rect3))
+console.log(isOverlap(rect4, rect5)) // false
