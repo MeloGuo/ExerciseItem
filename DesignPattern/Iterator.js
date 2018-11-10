@@ -66,6 +66,14 @@ var getFormUploadObj = function () {
   return  $(str).appendTo($('body'))
 }
 
+var getWebkitUploadObj = function () {
+  //
+}
+
+var getHtml5UploadObj = function () {
+  // 
+}
+
 var iteratorUploadFile = function () {
   for (var i = 0, fn; fn = arguments[i++];) {
     var uploadObj = fn()
@@ -75,4 +83,5 @@ var iteratorUploadFile = function () {
   }
 }
 
-var uploadObj = iteratorUploadFile(getActiveUploadObj, getFlashUploadObj, getFormUploadObj)
+var uploadObj = iteratorUploadFile(getActiveUploadObj, getFlashUploadObj, getFormUploadObj,
+  getWebkitUploadObj, getHtml5UploadObj) // 按照优先级
