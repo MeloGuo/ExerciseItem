@@ -125,3 +125,60 @@ const rect5 = { x: 143.12948799657278, y: 21.16268773055232, width: 242.39146722
 console.log(isOverlap(rect1, rect2))
 console.log(isOverlap(rect1, rect3))
 console.log(isOverlap(rect4, rect5)) // false
+
+/**
+ * #97 类名操作
+ */
+const addClass = (dom, name) => {
+  if (dom.classList) {
+    dom.classList.add(name)
+    return
+  }
+
+  const className = dom.className
+  dom.className = className ? `${className} ${name}` : name
+}
+
+const hasClass = (dom, name) => {
+  const className = dom.className
+
+  if (className === '') {
+    return false
+  }
+
+  if (dom.classList) {
+    return dom.classList.contains(dom)
+  }
+
+  const classNames = className.split(' ')
+  return classNames.some((className) => {
+    if (className === name) {
+      return true
+    }
+  })
+}
+
+const removeClass = (dom, name) => {
+  if (!hasClass(dom, name)) {
+    return
+  }
+
+  if (dom.classList) {
+    dom.classList.remove(name)
+    return
+  }
+
+  const classNames = dom.className.split(' ')
+  dom.className = classNames.filter((className) => {
+    if (className !== name) {
+      return className
+    }
+  }).join(' ')
+}
+
+/**
+ * #96 spacify
+ */
+String.prototype.spacify = function () {
+  return this.split('').join(' ')
+}
