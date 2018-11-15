@@ -182,3 +182,25 @@ const removeClass = (dom, name) => {
 String.prototype.spacify = function () {
   return this.split('').join(' ')
 }
+
+/**
+ * #94 按下标插入
+ */
+const injectSections = (items, sections) => {
+  sections.sort((a, b) => {
+    return b.index - a.index
+  }).forEach((section, index) => {
+    items.splice(section.index, 0, section.content)
+  })
+
+  return items
+}
+// test
+const injectResult = injectSections(
+  ['item1', 'item2', 'item3', 'item4', 'item5'],
+  [
+    { content: 'section2', index: 2 },
+    { content: 'section1', index: 0 }
+  ]
+)
+console.log(injectResult)
