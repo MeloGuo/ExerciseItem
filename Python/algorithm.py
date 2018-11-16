@@ -18,3 +18,23 @@ def binarySearch(list, item):
 # test
 print(binarySearch([1, 3, 5, 7, 9], 3))
 print(binarySearch([1, 3, 5, 7, 9], 111))
+
+# selection sort
+def selectionSort(arr):
+  def findSmallest(arr):
+    smallest = arr[0]
+    smallestIndex = 0
+    for i in range(1, len(arr)):
+      if arr[i] < smallest:
+        smallest = arr[i]
+        smallestIndex = i
+    return smallestIndex
+
+  newArr = []
+  for i in range(len(arr)):
+    smallest = findSmallest(arr)
+    newArr.append(arr.pop(smallest))
+  return newArr
+
+# test
+print(selectionSort([5, 3, 7, 1]))
