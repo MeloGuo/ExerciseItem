@@ -204,3 +204,74 @@ const injectResult = injectSections(
   ]
 )
 console.log(injectResult)
+
+/**
+ * #92 专业盗贼
+ */
+const rob = (nums) => { // TODO:待完善
+  let i = 0
+  let e = 0
+  for (let k = 0; k < nums.length; k++) {
+    let tmp = i
+    i = nums[k] + e
+    e = Math.max(tmp, e)
+  }
+  return Math.max(i, e)
+}
+// test
+console.log(rob([1, 2, 3, 4, 5, 6, 7]))
+
+/**
+ * #91 数组拍平（二）
+ */
+function * flatten2 (arr) {
+  const flatten = (arr) => arr.reduce((result, item) => {
+    Array.isArray(item) ? result.push(...flatten(item)) : result.push(item)
+    return result
+  }, [])
+  const result = flatten(arr)
+  for (let index = 0; index < result.length; index++) {
+    const element = result[index]
+    yield element
+  }
+}
+// 参考答案
+function * flatten2R (arr) {
+  for (let index = 0; index < arr.length; index++) {
+    const element = arr[index]
+    Array.isArray(element) ? yield * flatten2R(element) : yield element
+  }
+}
+// test
+const numbers = flatten2R([1, [[2], 3, 4], 5])
+console.log(numbers.next().value) // => 1
+console.log(numbers.next().value) // => 2
+console.log(numbers.next().value) // => 3
+console.log(numbers.next().value) // => 4
+console.log(numbers.next().value) // => 5
+
+/**
+ * #33 数组拍平
+ */
+const flatten = (arr) => {
+  const result = []
+
+  ;(function f (arr) {
+    arr.forEach((item) => {
+      if (!Array.isArray(item)) {
+        result.push(item)
+      } else {
+        f(item)
+      }
+    })
+  })(arr)
+
+  return result
+}
+// 参考答案
+const flattenR = (arr) => arr.reduce((result, item) => {
+  Array.isArray(item) ? result.push(...flattenR(item)) : result.push(item)
+  return result
+}, [])
+// test
+console.log(flatten([1, [[2], 3, 4], 5]))
