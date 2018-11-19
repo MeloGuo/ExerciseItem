@@ -275,3 +275,54 @@ const flattenR = (arr) => arr.reduce((result, item) => {
 }, [])
 // test
 console.log(flatten([1, [[2], 3, 4], 5]))
+
+/**
+ * #89 数组去重
+ */
+const unique = (arr) => { // 这种方法没法分辨number和string
+  const tmp = {}
+  const result = []
+
+  arr.forEach((item) => {
+    if (!tmp.hasOwnProperty(item)) {
+      tmp[item] = Symbol(item)
+      result.push(item)
+    }
+  })
+
+  return result
+}
+// test
+console.log(unique([0, 1, 2, 2, 3, 3, 4])) // => [0, 1, 2, 3, 4]
+console.log(unique([0, 1, '1', '1', 2])) // => [0, 1, 2]
+
+const unique2 = (arr) => {
+  const tmp = new Set()
+  const result = []
+
+  arr.forEach((item) => {
+    if (!tmp.has(item)) {
+      tmp.add(item)
+      result.push(item)
+    }
+  })
+
+  return result
+}
+// test
+console.log(unique2([0, 1, 2, 2, 3, 3, 4])) // => [0, 1, 2, 3, 4]
+console.log(unique2([0, 1, '1', '1', 2])) // => [0, 1, '1', 2]
+
+/**
+ * #88 noConflict
+ */
+;(function () {
+  const old$ = window.$
+
+  const self = window.$ = {
+    noConflict () {
+      window.$ = old$
+      return self
+    }
+  }
+})()
