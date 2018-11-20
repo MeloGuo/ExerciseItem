@@ -326,3 +326,44 @@ console.log(unique2([0, 1, '1', '1', 2])) // => [0, 1, '1', 2]
     }
   }
 })()
+
+/**
+ * #85 优先队列
+ */
+class PriorityQueue {
+  constructor () {
+    this.queue = []
+  }
+
+  add (item) {
+    const queue = this.queue
+    let added = false
+    for (let i = 0; i < queue.length; i++) {
+      if (queue[i] < item) {
+        queue.splice(i, 0, item)
+        added = true
+        break
+      }
+    }
+    if (added === false) {
+      queue.push(item)
+    }
+  }
+
+  remove () {
+    return this.queue.shift()
+  }
+
+  print () {
+    console.log(this.queue)
+  }
+}
+// test
+const pq = new PriorityQueue()
+pq.add(1)
+pq.add(2)
+pq.add(3)
+
+console.log(pq.remove()) // => 3
+console.log(pq.remove()) // => 2
+console.log(pq.remove()) // => 1
