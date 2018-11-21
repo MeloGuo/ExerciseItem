@@ -328,6 +328,19 @@ console.log(unique2([0, 1, '1', '1', 2])) // => [0, 1, '1', 2]
 })()
 
 /**
+ * #86 字体高亮函数
+ */
+const highlight = (strings, ...args) => {
+  return strings.reduce((str, cur, i) => {
+    return `${str}${cur}${args[i] ? `<span class="hightlight">${args[i]}</span>` : ''}`
+  }, '')
+}
+// test
+const yourName = 'Qu'
+const myName = 'Guo'
+console.log(highlight`Hello, ${yourName}. I am ${myName}`)
+
+/**
  * #85 优先队列
  */
 class PriorityQueue {
