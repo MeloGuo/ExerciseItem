@@ -4,43 +4,60 @@ const createDOMFromString = (domString) => {
   return div
 }
 
-class LikeButton {
-  constructor (props) {
-    this.state = {
-      isLiked: false
-    }
+const mount = (component, wrapper) => {
+  wrapper.appendChild(component._renderDOM())
+  component.onStateChange = (oldEl, newEl) => {
+    wrapper.insertBefore(newEl, oldEl)
+    wrapper.removeChild(oldEl)
+  }
+}
+
+class Component {
+  constructor (props = {}) {
+    this.props = props
   }
 
   setState (state) {
     const oldEl = this.el
     this.state = state
-    this.el = this.render()
+    this._renderDOM()
     if (this.onStateChange) {
       this.onStateChange(oldEl, this.el)
     }
   }
 
-  changeLikeText () {
+  _renderDOM () {
+    this.el = createDOMFromString(this.render())
+    if (this.onClick) {
+      this.el.addEventListener('click', this.onClick.bind(this), false)
+    }
+    return this.el
+  }
+}
+
+class LikeButton extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      isLiked: false
+    }
+  }
+
+  onClick () {
     this.setState({
       isLiked: !this.state.isLiked
     })
   }
 
   render () {
-    this.el = createDOMFromString(`
-      <button class="like-btn">
+    return `
+      <button class="like-btn" style="background-color: ${this.props.bgColor};">
         <span class="like-text">${this.state.isLiked ? '取消' : '点赞'}</span>
         <span>👍</span>
-      </button>`)
-    this.el.addEventListener('click', this.changeLikeText.bind(this), false)
-    return this.el
+      </button>
+    `
   }
 }
 
 const wrapper = document.querySelector('.wrapper')
-const likeButton = new LikeButton()
-wrapper.appendChild(likeButton.render())
-likeButton.onStateChange = (oldEl, newEl) => {
-  wrapper.insertBefore(newEl, oldEl)
-  wrapper.removeChild(oldEl)
-}
+mount(new LikeButton({ bgColor: 'red' }), wrapper)
