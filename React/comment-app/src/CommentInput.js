@@ -1,22 +1,12 @@
 import React, { Component } from 'react'
+import wrapWithLoadData from './wrapWithLoadData'
 
 class CommentInput extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      username: '',
+      username: props.data,
       content: ''
-    }
-  }
-
-  componentWillMount () {
-    this._loadUsername()
-  }
-
-  _loadUsername () {
-    const username = localStorage.getItem('username')
-    if (username) {
-      this.setState({ username })
     }
   }
 
@@ -31,11 +21,7 @@ class CommentInput extends Component {
   }
 
   handleUsernameBlur (event) {
-    this._saveUsername(event.target.value)
-  }
-
-  _saveUsername (username) {
-    localStorage.setItem('username', username)
+    this.props.saveData(event.target.value)
   }
 
   handleContentChange (event) {
@@ -90,4 +76,5 @@ class CommentInput extends Component {
   }
 }
 
+CommentInput = wrapWithLoadData(CommentInput, 'username')
 export default CommentInput
