@@ -9,8 +9,9 @@ function getPostData () {
 }
 
 class Post extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+    console.log(this.props)
     this.state = {
       postContent: ''
     }
@@ -18,6 +19,7 @@ class Post extends Component {
 
   componentWillMount () {
     this._loadData()
+    console.log(this.props)
   }
 
   handleClickRefresh () {
